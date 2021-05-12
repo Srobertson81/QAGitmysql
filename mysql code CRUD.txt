@@ -1,0 +1,238 @@
+mysql> CREATE DATABASE test;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| test               |
+| world              |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> USE test;
+Database changed
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> fk_customer_id INT NOT NULL,
+    -> placed DATE NOT NULL,
+    -> FOREIGN KEY (fk_customer_id) REFERENCES customers(customer_id)
+    -> );
+ERROR 1824 (HY000): Failed to open the referenced table 'customers'
+mysql> CREATE TABLE customers;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> CREATE TABLE customers (
+    -> customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> name CHAR NOT NULL,
+    -> age INT NOT NULL,)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+)' at line 4
+mysql> CREATE TABLE customers (
+    ->     -> customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     -> name CHAR NOT NULL,
+    ->     -> age INT NOT NULL,)
+    ->
+    -> fsgdfs
+    -> 0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> name CHAR NOT NULL,
+    ->' at line 2
+mysql> CREATE TABLE customers (
+    -> customers_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> name CHAR NOT NULL,
+    -> age INT NOT NULL,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+mysql> CREATE TABLE customers (
+    -> customers_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->  name CHAR NOT NULL,
+    -> age INT NOT NULL
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> SHOW DATABASE test;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE test' at line 1
+mysql> SHOW DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE' at line 1
+mysql> SHOW test;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'test' at line 1
+mysql> SHOW test;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'test' at line 1
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_test |
++----------------+
+| customers      |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW TABLE orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'orders' at line 1
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> fk_customer_id INT NOT NULL,
+    -> placed DATE NOT NULL,
+    -> FOREIGN KEY (fk_customer_id) REFERENCES customers(customer_id)
+    -> );
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'customer_id' for constraint 'orders_ibfk_1' in the referenced table 'customers'
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> fk_customers_id INT NOT NULL,
+    -> placed DATE NOT NULL,
+    -> FOREIGN KEY (fk_customers_id) REFERENCES customers(customers_id)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_test |
++----------------+
+| customers      |
+| orders         |
++----------------+
+2 rows in set (0.01 sec)
+
+mysql> DESCRIBE customers;
++--------------+---------+------+-----+---------+----------------+
+| Field        | Type    | Null | Key | Default | Extra          |
++--------------+---------+------+-----+---------+----------------+
+| customers_id | int     | NO   | PRI | NULL    | auto_increment |
+| name         | char(1) | NO   |     | NULL    |                |
+| age          | int     | NO   |     | NULL    |                |
++--------------+---------+------+-----+---------+----------------+
+3 rows in set (0.04 sec)
+
+mysql> DESCRIBE orders
+    -> ;
++-----------------+------+------+-----+---------+----------------+
+| Field           | Type | Null | Key | Default | Extra          |
++-----------------+------+------+-----+---------+----------------+
+| order_id        | int  | NO   | PRI | NULL    | auto_increment |
+| fk_customers_id | int  | NO   | MUL | NULL    |                |
+| placed          | date | NO   |     | NULL    |                |
++-----------------+------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> CREATE TABLE products (
+    -> product_id INT PRMARY KEY AUTO_INCREMENT,
+    -> name VARCHAR NOT NULL,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRMARY KEY AUTO_INCREMENT,
+name VARCHAR NOT NULL,' at line 2
+mysql> CREATE TABLE products (
+    -> product_id INT PRMARY KEY AUTO_INCREMENT NOT NULL,
+    -> title VARCHAR(60) NOT NULL,
+    -> price DECIMAL(6,2) NOT NULL
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRMARY KEY AUTO_INCREMENT NOT NULL,
+title VARCHAR(60) NOT NULL,
+price DECIMAL(6,' at line 2
+mysql> CREATE TABLE products (
+    -> products_id INT PRMARY KEY AUTO_INCREMENT NOT NULL,
+    -> title VARCHAR(60) NOT NULL,
+    -> price DEC(6,2) NOT NULL
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRMARY KEY AUTO_INCREMENT NOT NULL,
+title VARCHAR(60) NOT NULL,
+price DEC(6,2) N' at line 2
+mysql> CREATE TABLE products (
+    -> products_id INT PRMARY KEY AUTO_INCREMENT NOT NULL,
+    -> title VARCHAR NOT NULL,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRMARY KEY AUTO_INCREMENT NOT NULL,
+title VARCHAR NOT NULL,
+)' at line 2
+mysql> CREATE TABLE products (
+    -> products_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    -> title VARCHAR(60) NOT NULL,
+    -> price DEC(6,2) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> DESCRIBE products;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| products_id | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(60)  | NO   |     | NULL    |                |
+| price       | decimal(6,2) | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE orders ADD FOREIGN KEY (fk_products_id) REFERENCES products(products_id);
+ERROR 1072 (42000): Key column 'fk_products_id' doesn't exist in table
+mysql> ALTER TABLE orders;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ADD FOREIGN KEY (fk_products_id) REFERENCES products(products_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ADD FOREIGN KEY (fk_products_id) REFERENCES products(products_id)' at line 1
+mysql> ALTER TABLE orders
+    -> ADD fk_customers_id INT NOT NULL,
+    -> FOREIGN KEY (fk_products_id) REFERENCES products(products_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY (fk_products_id) REFERENCES products(products_id)' at line 3
+mysql> DROP TABLE orders;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_test |
++----------------+
+| customers      |
+| products       |
++----------------+
+2 rows in set (0.01 sec)
+
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> fk_customers_id INT NOT NULL,
+    -> placed DATE NOT NULL,
+    -> fk_products_id INT NOT NULL,
+    -> FOREIGN KEY (fk_customers_id) REFERENCES customers(customers_id),
+    -> FOREIGN KEY (fk_products_id) REFERENCES products(products_id),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 8
+mysql> CREATE TABLE orders (
+    -> order_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> placed DATE NOT NULL,
+    -> fk_customers_id INT NOT NULL,
+    -> fk_products_id INT NOT NULL,
+    -> FOREIGN KEY (fk_customers_id) REFERENCES customers(customers_id),
+    -> FOREIGN KEY (fk_products_id) REFERENCES products(products_id)
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> DESCRIBE orders;
++-----------------+------+------+-----+---------+----------------+
+| Field           | Type | Null | Key | Default | Extra          |
++-----------------+------+------+-----+---------+----------------+
+| order_id        | int  | NO   | PRI | NULL    | auto_increment |
+| placed          | date | NO   |     | NULL    |                |
+| fk_customers_id | int  | NO   | MUL | NULL    |                |
+| fk_products_id  | int  | NO   | MUL | NULL    |                |
++-----------------+------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> ALTER TABLE products
+    -> ADD stock int NOT NULL;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE customers
+    -> ADD email VARCHAR(60) NOT NULL,
+    -> ADD address VARCHAR NOT NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOT NULL' at line 3
+mysql> ALTER TABLE customers
+    -> ADD email VARCHAR(60) NOT NULL,
+    -> address VARCHAR NOT NULL,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'address VARCHAR NOT NULL,' at line 3
+mysql> ALTER TABLE customers
+    -> ADD email VARCHAR(60) NOT NULL;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
