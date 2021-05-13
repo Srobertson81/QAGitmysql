@@ -1,0 +1,42 @@
+SHOW DATABASES;
+USE test;
+SHOW TABLES;
+
+DESC customers;
+INSERT INTO customers (name, age, email) VALUES ('Jason Green', 35, 'jgreen@gmail.com');
+INSERT INTO customers (name, age, email) VALUES ('Ryan Grey', 26, 'rgrey@gmail.com');
+INSERT INTO customers (name, age, email) VALUES ('Susan Stone', 57, 'sstone@gmail.com');
+INSERT INTO customers (name, age, email) VALUES ('Ruth Williams', 73, 'rwilliams@gmail.com');
+INSERT INTO customers (name, age, email) VALUES ('Mike Roberts', 19, 'mroberts@gmail.com');
+
+DESC products;
+INSERT INTO products (title, price, stock) VALUES ('CRAZY8', 6.50, 12);
+INSERT INTO products (title, price, stock) VALUES ('OLDMAID', 5.00, 23);
+INSERT INTO products (title, price, stock) VALUES ('TWISTER', 15.50, 56);
+INSERT INTO products (title, price, stock) VALUES ('BANANAGRAMS', 7.00, 82);
+INSERT INTO products (title, price, stock) VALUES ('LIFE', 20.00, 8);
+
+SELECT * FROM customers; 
+DESC orders;
+INSERT INTO orders (placed, fk_customers_id, fk_products_id) VALUES (10/21/2020, 1, 5);
+INSERT INTO orders (placed, fk_customers_id, fk_products_id) VALUES (9/21/2019, 2, 2);
+INSERT INTO orders (placed, fk_customers_id, fk_products_id) VALUES (8/1/2017, 3, 3);
+INSERT INTO orders (placed, fk_customers_id, fk_products_id) VALUES (11/2/2021, 4, 5);
+INSERT INTO orders (placed, fk_customers_id, fk_products_id) VALUES (02/1/2018, 5, 4);
+
+UPDATE customers
+SET name='David Woods', age=37, email='dwoods@gmail.com'
+WHERE name='Jason Green';
+UPDATE customers
+SET name='Charlotte Williams', age=72, email='cwilliams@gmail.com'
+WHERE name='Ruth Williams';
+
+SET SQL_SAFE_UPDATES=0;
+DELETE FROM customers WHERE name='Mike Roberts';
+
+SELECT * FROM customers WHERE name='Susan Stone';
+SELECT * FROM orders;
+SELECT * FROM orders WHERE order_id=5;
+SELECT * FROM products;
+SELECT * FROM products WHERE title='OLDMAID';
+SELECT * FROM customers JOIN orders ON customers.customers_id = orders.fk_customers_id;
